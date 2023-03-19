@@ -3,7 +3,7 @@ import Image from 'next/image'
 import IconCart from './IconCart';
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link';
-import { formatBalance } from '@/helper';
+import { formatBalance, sanitizeUri } from '@/helper';
 
 interface Metadata {
     name: string;
@@ -27,6 +27,8 @@ interface Metadata {
 
 export default function ProductCard({ item }: { item: Item } ) {
     const price = formatBalance(item.price)
+    const imageMaybe = sanitizeUri(item.image || item.meta?.image)
+    const image: string = imageMaybe ? imageMaybe : "/Luna1.jpeg"
 
     return (
       <Link
@@ -37,8 +39,8 @@ export default function ProductCard({ item }: { item: Item } ) {
         <div
         className=" aspect-square w-full bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-500 relative"
         >
-          <Image
-            src="/Luna1.jpeg"
+          <img
+            src={image}
             alt="image"
             width="400"
             height="400"

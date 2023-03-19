@@ -1,4 +1,5 @@
 import { formatBalance as format } from "@polkadot/util"
+import { $purify } from "@kodadot1/minipfs"
 
 export function shortAddress(
     address: string,
@@ -24,3 +25,7 @@ export function formatBalance(amount?: bigint | string) {
     });
     return intl.format(Number(magic)).replace(',', '.');
 }
+
+export function sanitizeUri(uri?: string) {
+    return uri ? $purify(uri).at(0) : ''
+  }

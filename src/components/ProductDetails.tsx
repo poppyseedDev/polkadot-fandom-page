@@ -1,29 +1,31 @@
 import Image from "next/image";
 import ProductAction from "./ProductAction";
-import { shortAddress, formatBalance } from "@/helper";
+import { shortAddress, formatBalance, sanitizeUri } from "@/helper";
 
 interface Metadata {
-    name: string;
-    description: string;
-    image: string;
-    external_url?: string;
-    animation_url?: string;
-  }
+  name: string;
+  description: string;
+  image: string;
+  external_url?: string;
+  animation_url?: string;
+}
   
-  interface Item {
-    id: string;
-    createdAt: Date;
-    name: string;
-    metadata: string;
-    currentOwner: string;
-    image?: string;
-    meta?: Metadata;
-    price: bigint;
-    issuer: string;
-  }
+interface Item {
+  id: string;
+  createdAt: Date;
+  name: string;
+  metadata: string;
+  currentOwner: string;
+  image?: string;
+  meta?: Metadata;
+  price: bigint;
+  issuer: string;
+}
 
 export default function Product({ item }: { item: Item}) {
   const price = formatBalance(item.price)
+  const imageMaybe = sanitizeUri(item.image || item.meta?.image)
+  const image: string = imageMaybe ? imageMaybe : "/Luna1.jpeg"
 
     return (
         <div className="w-11/12 max-w-5xl mx-auto mt-8 lg:grid lg:grid-cols-2 lg:gap-x-16">
@@ -71,9 +73,9 @@ export default function Product({ item }: { item: Item}) {
         className="aspect-square w-full bg-white rounded-xl border-2 border-gray-200 mt-12 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-start"
       >
         <div className="rounded-lg overflow-hidden">
-            <Image
+            <img
               id="productImage"
-              src="/Luna1.jpeg"
+              src={image}
               alt={item.name}
               width="400"
               height="400"
