@@ -2,27 +2,75 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { InferGetStaticPropsType } from 'next'
 
-import { getClient } from '@kodadot1/uniquery'
+import { extendFields, getClient } from '@kodadot1/uniquery'
 
+interface Metadata {
+  name: string;
+  description: string;
+  image: string;
+  external_url?: string;
+  animation_url?: string;
+}
 
-const inter = Inter({ subsets: ['latin'] })
+interface Item {
+  id: string;
+  createdAt: Date;
+  name: string;
+  metadata: string;
+  currentOwner: string;
+  image?: string;
+  meta?: Metadata;
+  price: bigint;
+  issuer: string;
+}
+
+export type GraphLike<T> = { data: T } | T
+
+export type  Data = GraphLike<{ items: Item[]; } | null>
 
 export const getStaticProps = async () => {
-  const client = getClient()
-  const id = '2305670031'
-  const query = client.collectionById(id)
-  const result = await client.fetch(query)
+  const client = getClient('bsx')
+  const id = '2551182625'
+  const query = client.itemListByCollectionId(id, {
+    fields: extendFields(['meta', 'price']),
+    orderBy: 'createdAt_ASC',
+  })
+  const res: Data = await client.fetch(query)
 
-  console.log(result)
+  let itemam: {
+    items: Item[]
+  } | null 
+
+  let items: Item[] | undefined
+
+  if (res) {
+    if ('data' in res) {
+      itemam = res.data
+    } else {
+      itemam = res
+    }
+    items = itemam?.items;
+  }
 
   return {
-    props: {}
+    props: { items }
   }
 }
 
 
-export default function Home() {
+export default function Home({ items }: InferGetStaticPropsType<typeof getStaticProps> ) {
+  if (typeof items == "undefined") {
+    return (
+      <>
+       Data unaccessible
+      </>
+    )
+  }
+
+  console.log(items)
+
   return (
     <>
       <Head>
@@ -33,9 +81,13 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div>
-          <p>
-            Hello world!
-          </p>
+          {items.map( item => (
+            <div key={item.id}>
+            <p>
+              { item.id }
+            </p>
+            </div>
+          ))}
         </div>
 
       </main>
