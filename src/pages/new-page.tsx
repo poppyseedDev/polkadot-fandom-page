@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { InferGetStaticPropsType } from 'next'
+import ProductCard from '@/components/ProductCard'
 
 import { extendFields, getClient } from '@kodadot1/uniquery'
 
@@ -80,16 +81,17 @@ export default function Home({ items }: InferGetStaticPropsType<typeof getStatic
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+      <div
+        className="w-11/12 max-w-5xl mx-auto mt-28"
+        aria-labelledby="information-heading"
+      >
+        <h2 id="information-heading" className="sr-only">
+          Product List
+        </h2>
         <div>
-          {items.map( item => (
-            <div key={item.id}>
-            <p>
-              { item.id }
-            </p>
-            </div>
-          ))}
+          {items.map( item => (<ProductCard key={item.id} item={item} />))}
         </div>
-
+      </div>
       </main>
     </>
   )

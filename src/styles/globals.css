@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -86,13 +90,22 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
+  color: #000;
+  /*
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    */
+  background: #f9f9f9;
+}
+
+.rainfall {
+  background-color: transparent;
+  background-image: url("/raindrops-animate.svg");
 }
 
 a {
