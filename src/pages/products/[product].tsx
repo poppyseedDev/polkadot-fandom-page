@@ -1,15 +1,32 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
-import { InferGetStaticPropsType } from 'next'
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import ProductDetails from '@/components/ProductDetails'
 
 import { extendFields, getClient } from '@kodadot1/uniquery'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: true,
+    }
+      
+}
 
+export async function getStaticProps( context: GetStaticPropsContext ) {
+    const productId = context.params!.product;
 
-export default function Product() {
+    return {
+      props: { productId }
+    }
+  }
+
+export default function Product({ productId }: InferGetStaticPropsType<typeof getStaticProps> ) {
+
+  console.log(productId);
 
   return (
     <>
@@ -42,8 +59,7 @@ export default function Product() {
           Back to shop
         </Link>
       </div>
-      <ProductDetails item={data.item!} />
-      <Footer />
+      <ProductDetails item="productId" />
       </main>
     </>
   )
