@@ -25,7 +25,6 @@ interface Metadata {
   }
 
 export default function ProductCard({ item }: { item: Item } ) {
-
     return (
       <Link
         key={item.id}
@@ -33,13 +32,13 @@ export default function ProductCard({ item }: { item: Item } ) {
         className="group"
       >
         <div
-        className="w-full bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-500 relative"
+        className=" aspect-square w-full bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-500 relative"
         >
           <Image
             src="/Luna1.jpeg"
             alt="image"
-            width={400}
-            height={400}
+            width="400"
+            height="400"
             className="w-full h-full object-center object-contain absolute block"
           />
           <div

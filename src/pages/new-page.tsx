@@ -88,7 +88,7 @@ export default function Home({ items }: InferGetStaticPropsType<typeof getStatic
         <h2 id="information-heading" className="sr-only">
           Product List
         </h2>
-        <div>
+        <div className="grid grid-cols-1 gap-8 sm:!gap-x-10 sm:!grid-cols-2 lg:!grid-cols-3 lg:!gap-x-12 lg:!gap-y-10">
           {items.map( item => (<ProductCard key={item.id} item={item} />))}
         </div>
       </div>
