@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ProductAction from "./ProductAction";
+import { shortAddress, formatBalance } from "@/helper";
 
 interface Metadata {
     name: string;
@@ -21,12 +22,9 @@ interface Metadata {
     issuer: string;
   }
 
-function shortAddress(price: string) {
-    return 30
-}
+export default function Product({ item }: { item: Item}) {
+  const price = formatBalance(item.price)
 
-
-export default function Product({ item }: { item: String}) {
     return (
         <div className="w-11/12 max-w-5xl mx-auto mt-8 lg:grid lg:grid-cols-2 lg:gap-x-16">
         {/* Product details */}
@@ -35,17 +33,17 @@ export default function Product({ item }: { item: String}) {
             <div className="w-full flex items-center justify-between gap-4">
               <hgroup>
                 <h2 className="text-xl lg:!text-2xl font-semibold text-gray-800">
-                  Item name
+                  {item.name}
                 </h2>
                 <h3 className="text-gray-500 text-base leading-tight">
                 Owned by {' '}
-                <a className="text-blue-500 hover:underline" target="_blank" href={`https://kodadot.xyz/bsx/u/test`} >
-                { shortAddress("price")}
+                <a className="text-blue-500 hover:underline" target="_blank" href={`https://kodadot.xyz/bsx/u/${item.currentOwner}`} >
+                { shortAddress(item.currentOwner)}
                 </a>
                 </h3>
               </hgroup>
               <div className="bg-[#E8E7E5] rounded-full px-6 py-2 text-lg text-gray-900 font-bold">
-                32
+                {price}
               </div>
             </div>
           </div>
@@ -62,7 +60,8 @@ export default function Product({ item }: { item: String}) {
           <div className="mt-4 space-y-6">
             <p
               className={"text-base text-gray-600"}
-            >Description</p>
+              dangerouslySetInnerHTML={{ __html: item.meta?.description || item.name }}
+            />
           </div>
         </section>
       </div>
@@ -75,7 +74,7 @@ export default function Product({ item }: { item: String}) {
             <Image
               id="productImage"
               src="/Luna1.jpeg"
-              alt="test"
+              alt={item.name}
               width="400"
               height="400"
               className="w-full h-full object-center object-contain"
@@ -88,7 +87,7 @@ export default function Product({ item }: { item: String}) {
       <div className="mt-12 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
         <section aria-labelledby="options-heading">
           <div className="mt-4">
-            <ProductAction id="{item.id}" />
+            <ProductAction id={item.id} />
           </div>
         </section>
       </div>

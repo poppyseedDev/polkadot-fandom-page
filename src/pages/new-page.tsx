@@ -40,10 +40,7 @@ export const getStaticProps = async () => {
   })
   const res: Data = await client.fetch(query)
 
-  let itemam: {
-    items: Item[]
-  } | null 
-
+  let itemam: { items: Item[]} | null 
   let items: Item[] | undefined
 
   if (res) {
