@@ -7,6 +7,7 @@ import ProductDetails from '@/components/ProductDetails'
 import { extendFields, getClient } from '@kodadot1/uniquery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Footer from '@/components/Footer'
 
 export async function getStaticPaths() {
     return {
@@ -61,6 +62,7 @@ export default function Product({ productId }: InferGetStaticPropsType<typeof ge
       </div>
       <ProductDetails item="productId" />
       </main>
+      <Footer />
     </>
   )
 }

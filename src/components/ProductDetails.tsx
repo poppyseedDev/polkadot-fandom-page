@@ -1,3 +1,5 @@
+import Image from "next/image";
+import ProductAction from "./ProductAction";
 
 interface Metadata {
     name: string;
@@ -47,8 +49,50 @@ export default function Product({ item }: { item: String}) {
               </div>
             </div>
           </div>
+
+          
+          <section
+          aria-labelledby="information-heading"
+          className="mt-12 pt-6 border-t-1 border-gray-200"
+        >
+          <h2 id="information-heading" className="sr-only">
+            Product information
+          </h2>
+
+          <div className="mt-4 space-y-6">
+            <p
+              className={"text-base text-gray-600"}
+            >Description</p>
+          </div>
+        </section>
+      </div>
+
+      {/* Product image */}
+      <div
+        className="aspect-square w-full bg-white rounded-xl border-2 border-gray-200 mt-12 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-start"
+      >
+        <div className="rounded-lg overflow-hidden">
+            <Image
+              id="productImage"
+              src="/Luna1.jpeg"
+              alt="test"
+              width="400"
+              height="400"
+              className="w-full h-full object-center object-contain"
+            />
+
         </div>
-        </div>
+      </div>
+
+      {/* Product form */}
+      <div className="mt-12 lg:max-w-lg lg:col-start-1 lg:row-start-2 lg:self-start">
+        <section aria-labelledby="options-heading">
+          <div className="mt-4">
+            <ProductAction id="{item.id}" />
+          </div>
+        </section>
+      </div>
+    </div>
     )
 
 }
