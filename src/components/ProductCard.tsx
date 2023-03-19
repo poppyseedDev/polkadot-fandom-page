@@ -3,6 +3,7 @@ import Image from 'next/image'
 import IconCart from './IconCart';
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link';
+import { formatBalance } from '@/helper';
 
 interface Metadata {
     name: string;
@@ -25,6 +26,8 @@ interface Metadata {
   }
 
 export default function ProductCard({ item }: { item: Item } ) {
+    const price = formatBalance(item.price)
+
     return (
       <Link
         key={item.id}
@@ -55,7 +58,7 @@ export default function ProductCard({ item }: { item: Item } ) {
             />
           </h3>
           <strong className="text-lg font-bold text-gray-800">
-            23
+            {price}
           </strong>
         </div>
       </Link>
