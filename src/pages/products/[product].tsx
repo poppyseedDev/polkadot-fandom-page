@@ -7,33 +7,12 @@ import { extendFields, getClient } from '@kodadot1/uniquery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Footer from '@/components/Footer'
-import Header from '@/components/HeadElement'
+import Header from '@/components/Header'
 import HeadElement from '@/components/HeadElement'
+import { Prefix } from '@kodadot1/static'
+import { SingleItem, Item } from '@/helper/types'
 
-interface Metadata {
-    name: string;
-    description: string;
-    image: string;
-    external_url?: string;
-    animation_url?: string;
-  }
-  
-interface Item {
-    id: string;
-    createdAt: Date;
-    name: string;
-    metadata: string;
-    currentOwner: string;
-    image?: string;
-    meta?: Metadata;
-    price: bigint;
-    issuer: string;
-}
-
-export type GraphLike<T> = { data: T } | T
-
-export type SingleItem = GraphLike<{ item: Item; } | null>
-
+const CHAIN = process.env.CHAIN as Prefix | undefined;
 
 export async function getStaticPaths() {
     return {
@@ -45,7 +24,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps( context: GetStaticPropsContext ) {
     const productId = context.params!.product;
-    const client = getClient('bsx')
+    const client = getClient(CHAIN)
     
     if (typeof productId == "string") {
         const query = client.itemById(productId, extendFields(['meta', 'price']))
@@ -83,6 +62,7 @@ if (typeof item == "undefined") {
         image={item.image}
         title={item.name}
       />
+      <Header />
       <main className={styles.main}>
       <div
         className="w-11/12 mt-16 max-w-5xl mx-auto flex items-center justify-between relative"

@@ -67,7 +67,7 @@
   dependencies:
     ohmyfetch "^0.4.20"
 
-"@kodadot1/static@0.0.1-rc.0":
+"@kodadot1/static@0.0.1-rc.0", "@kodadot1/static@^0.0.1-rc.0":
   version "0.0.1-rc.0"
   resolved "https://registry.yarnpkg.com/@kodadot1/static/-/static-0.0.1-rc.0.tgz#d013c0c5155d5bb108652ed68b543e8553063d94"
   integrity sha512-0c91/nU4kyVSA218+vDJHnbGbBxFauuv7LpTXdQHo2vXvxbDou46tvSqN7Ac91SG1blTKhgMe2xWBEBsA4n7Nw==

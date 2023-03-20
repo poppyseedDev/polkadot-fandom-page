@@ -7,30 +7,8 @@ import ProductCard from '@/components/ProductCard'
 
 import { extendFields, getClient } from '@kodadot1/uniquery'
 import Header from '@/components/Header'
+import { MultipleItems, Item } from '@/helper/types'
 
-interface Metadata {
-  name: string;
-  description: string;
-  image: string;
-  external_url?: string;
-  animation_url?: string;
-}
-
-interface Item {
-  id: string;
-  createdAt: Date;
-  name: string;
-  metadata: string;
-  currentOwner: string;
-  image?: string;
-  meta?: Metadata;
-  price: bigint;
-  issuer: string;
-}
-
-export type GraphLike<T> = { data: T } | T
-
-export type  Data = GraphLike<{ items: Item[]; } | null>
 
 export const getStaticProps = async () => {
   const client = getClient('bsx')
@@ -39,7 +17,7 @@ export const getStaticProps = async () => {
     fields: extendFields(['meta', 'price']),
     orderBy: 'createdAt_ASC',
   })
-  const res: Data = await client.fetch(query)
+  const res: MultipleItems = await client.fetch(query)
 
   let itemam: { items: Item[]} | null 
   let items: Item[] | undefined
