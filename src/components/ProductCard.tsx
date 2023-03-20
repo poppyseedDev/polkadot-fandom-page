@@ -1,34 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import IconCart from './IconCart';
-import styles from '@/styles/Home.module.css'
 import Link from 'next/link';
 import { formatBalance, sanitizeUri } from '@/helper';
-
-interface Metadata {
-    name: string;
-    description: string;
-    image: string;
-    external_url?: string;
-    animation_url?: string;
-  }
-  
-  interface Item {
-    id: string;
-    createdAt: Date;
-    name: string;
-    metadata: string;
-    currentOwner: string;
-    image?: string;
-    meta?: Metadata;
-    price: bigint;
-    issuer: string;
-  }
+import { Item } from '@/helper/types';
 
 export default function ProductCard({ item }: { item: Item } ) {
     const price = formatBalance(item.price)
     const imageMaybe = sanitizeUri(item.image || item.meta?.image)
-    const image: string = imageMaybe ? imageMaybe : "/Luna1.jpeg"
+    const image: string = (typeof imageMaybe !== 'undefined') ? imageMaybe : "/Luna1.jpeg"
 
     return (
       <Link

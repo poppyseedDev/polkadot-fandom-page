@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import ProductDetails from '@/components/ProductDetails'
@@ -18,8 +17,7 @@ export async function getStaticPaths() {
     return {
         paths: [],
         fallback: true,
-    }
-      
+    } 
 }
 
 export async function getStaticProps( context: GetStaticPropsContext ) {
@@ -63,7 +61,6 @@ if (typeof item == "undefined") {
         title={item.name}
       />
       <Header />
-      <main className={styles.main}>
       <div
         className="w-11/12 mt-16 max-w-5xl mx-auto flex items-center justify-between relative"
       >
@@ -87,7 +84,6 @@ if (typeof item == "undefined") {
         </Link>
       </div>
       <ProductDetails item={item} />
-      </main>
       <Footer />
     </>
   )
