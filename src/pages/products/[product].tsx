@@ -8,10 +8,8 @@ import { useRouter } from 'next/router'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import HeadElement from '@/components/HeadElement'
-import { Prefix } from '@kodadot1/static'
 import { SingleItem, Item } from '@/helper/types'
 
-const CHAIN = process.env.CHAIN as Prefix | undefined;
 
 export async function getStaticPaths() {
     return {
@@ -22,7 +20,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps( context: GetStaticPropsContext ) {
     const productId = context.params!.product;
-    const client = getClient(CHAIN)
+    const client = getClient('bsx')
     
     if (typeof productId == "string") {
         const query = client.itemById(productId, extendFields(['meta', 'price']))

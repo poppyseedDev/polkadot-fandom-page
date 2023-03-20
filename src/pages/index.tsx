@@ -6,14 +6,12 @@ import ProductCard from '@/components/ProductCard'
 import { extendFields, getClient } from '@kodadot1/uniquery'
 import Header from '@/components/Header'
 import { MultipleItems, Item } from '@/helper/types'
-import { Prefix } from '@kodadot1/static'
 import Footer from '@/components/Footer'
 
-const CHAIN = process.env.CHAIN as Prefix | undefined
 const COLLECTION_ID = process.env.COLLECTION_ID as string
 
 export const getStaticProps = async () => {
-  const client = getClient(CHAIN)
+  const client = getClient('bsx')
   const query = client.itemListByCollectionId(COLLECTION_ID, {
     fields: extendFields(['meta', 'price']),
     orderBy: 'createdAt_ASC',
