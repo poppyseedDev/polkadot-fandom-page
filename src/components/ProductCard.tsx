@@ -2,6 +2,7 @@ import IconCart from './IconCart';
 import Link from 'next/link';
 import { formatBalance, sanitizeUri } from '@/helper';
 import { Item } from '@/helper/types';
+import Image from 'next/image';
 
 export default function ProductCard({ item }: { item: Item } ) {
     const price = formatBalance(item.price)
@@ -17,7 +18,7 @@ export default function ProductCard({ item }: { item: Item } ) {
         <div
         className=" aspect-square w-full bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-500 relative"
         >
-          <img
+          <Image
             src={image}
             alt="image"
             width="400"
