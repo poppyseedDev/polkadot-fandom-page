@@ -6,6 +6,7 @@ import { InferGetStaticPropsType } from 'next'
 import ProductCard from '@/components/ProductCard'
 
 import { extendFields, getClient } from '@kodadot1/uniquery'
+import Header from '@/components/Header'
 
 interface Metadata {
   name: string;
@@ -77,6 +78,7 @@ export default function Home({ items }: InferGetStaticPropsType<typeof getStatic
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <main className={styles.main}>
       <div
         className="w-11/12 max-w-5xl mx-auto mt-28"
