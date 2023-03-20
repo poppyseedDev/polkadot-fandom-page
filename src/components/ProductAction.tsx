@@ -1,7 +1,3 @@
-import Image from "next/image";
-
-
-
 export default function ProductAction({ id }: { id: string}) {
     const handleClick = () => {
         const url = `https://kodadot.xyz/bsx/gallery/${id}`;

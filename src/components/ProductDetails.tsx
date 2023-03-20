@@ -73,7 +73,7 @@ export default function Product({ item }: { item: Item}) {
         className="aspect-square w-full bg-white rounded-xl border-2 border-gray-200 mt-12 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-start"
       >
         <div className="rounded-lg overflow-hidden">
-            <Image
+            <img
               id="productImage"
               src={image}
               alt={item.name}

@@ -18,7 +18,7 @@ export default function ProductCard({ item }: { item: Item } ) {
         <div
         className=" aspect-square w-full bg-white rounded-xl overflow-hidden border-2 border-gray-200 transition-all duration-500 relative"
         >
-          <Image
+          <img
             src={image}
             alt="image"
             width="400"
