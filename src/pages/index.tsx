@@ -12,7 +12,7 @@ const COLLECTION_ID = process.env.COLLECTION_ID as string
 
 export const getStaticProps = async () => {
   const client = getClient('bsx')
-  const query = client.itemListByCollectionId(COLLECTION_ID, {
+  const query = client.itemListByCollectionId('2106275273', {
     fields: extendFields(['meta', 'price']),
     orderBy: 'createdAt_ASC',
   })
