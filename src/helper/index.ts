@@ -1,5 +1,5 @@
 import { formatBalance as format } from "@polkadot/util"
-import { $purify } from "@kodadot1/minipfs"
+import { $obtain, $purify, AvailableProviders } from "@kodadot1/minipfs"
 
 export function shortAddress(
     address: string,
@@ -27,5 +27,6 @@ export function formatBalance(amount?: bigint | string) {
 }
 
 export function sanitizeUri(uri?: string) {
-    return uri ? $purify(uri).at(0) : ''
+    let gateway: AvailableProviders = ['nftstorage']
+    return uri ? $purify(uri, gateway).at(0) : ''
   }
