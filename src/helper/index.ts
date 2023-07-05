@@ -1,5 +1,5 @@
 import { formatBalance as format } from "@polkadot/util"
-import { $obtain, $purify, AvailableProviders } from "@kodadot1/minipfs"
+import { $purify, AvailableProviders } from "@kodadot1/minipfs"
 
 export function shortAddress(
     address: string,
